@@ -10,18 +10,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-/*
-type Calc struct {
-	Number   int
-	Percente int
-}
-
-type Pessoa struct {
-	ID   int
-	Nome string
-}
-*/
-
 type Contact struct {
 	Id       int
 	Nome     string
@@ -29,7 +17,6 @@ type Contact struct {
 	Email    string
 }
 
-//var pessoas []Pessoa
 var contacts []Contact
 
 func main() {
@@ -41,7 +28,7 @@ func main() {
 	rotas.HandleFunc("/contactUpdate", updateContact).Methods("POST")
 	rotas.HandleFunc("/Random", getRandomNum).Methods("GET")
 
-	var port = ""
+	var port = "3000"
 
 	fmt.Println("Server running in port:", port)
 	log.Fatal(http.ListenAndServe(port, rotas))
@@ -103,44 +90,3 @@ func getAllH(w http.ResponseWriter, r *http.Request) {
 func getRandomNum(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(rand.Intn(1000))
 }
-
-/*
-func getPercent(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-
-	var calc Calc
-	_ = json.NewDecoder(r.Body).Decode(&calc)
-
-	var res = (calc.Number * calc.Percente) / 100
-	json.NewEncoder(w).Encode(res)
-}
-
-func addPerson(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-
-	var p Pessoa
-	_ = json.NewDecoder(r.Body).Decode(&p)
-
-	pessoas = append(pessoas, p)
-	json.NewEncoder(w).Encode(http.StatusOK)
-}
-
-func getAllPeople(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(pessoas)
-}
-
-func removePeople(w http.ResponseWriter, r *http.Request) {
-	var id int
-	_ = json.NewDecoder(r.Body).Decode(&id)
-	var newArray []Pessoa
-
-	for _, v := range a {
-		if id == pessoas[i] {
-			continue
-		} else {
-			newArray = append(newArray, v)
-		}
-	}
-
-	pessoas = newArray
-}*/
